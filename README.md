@@ -1,4 +1,8 @@
-# Data_Analytics_Project
+# Data_Analytics_Project:
+
+The project aims to utilizing Python and SQL technologies to extract insights from a dataset Souced from Kaggle. 
+Used Python and Pandas for Data Processing, Data Cleaning and Data Manipulation.
+
 Data Source: Kaggle API for dataset acquisition.
 
 Technologies Used:
