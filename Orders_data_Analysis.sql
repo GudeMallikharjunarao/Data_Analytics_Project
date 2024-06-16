@@ -20,6 +20,7 @@ CREATE TABLE orders (
 select * from orders;
 
 --find top 10 highest reveue generating products 
+
 select product_id,sum(sale_price) as sales
 from orders
 group by product_id
@@ -41,18 +42,22 @@ from cte) a
 where rn<=5;
 
 --find month over month growth comparison for 2022 and 2023 sales eg : jan 2022 vs jan 2023
-with cte as(
-SELECT EXTRACT(YEAR FROM order_date) AS order_year,
-extract(month from order_date) as order_month,sum(sale_price) as sales
-FROM Orders
-group by 1,2)
-select order_month
-,sum(case when order_year = 2022 then sales else 0) end as sales_2022
-,sum(case when order_year = 2023 then sales else 0) end as sales_2023
-from cte 
-group by order_month
 
-dd
+WITH cte AS (
+    SELECT 
+        EXTRACT(YEAR FROM order_date) AS order_year,
+        EXTRACT(MONTH FROM order_date) AS order_month,
+        SUM(sale_price) AS sales
+    FROM Orders
+    GROUP BY 1, 2
+)
+SELECT 
+    order_month,
+    SUM(CASE WHEN order_year = 2022 THEN sales ELSE 0 END) AS sales_2022,
+    SUM(CASE WHEN order_year = 2023 THEN sales ELSE 0 END) AS sales_2023
+FROM cte 
+GROUP BY order_month;
+
 --for each category which month had highest sales 
 
 WITH cte AS (
